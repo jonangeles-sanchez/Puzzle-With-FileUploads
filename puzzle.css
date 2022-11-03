@@ -1,0 +1,127 @@
+body{
+  background:#4680a2;
+  box-sizing:border-box;
+}
+
+form{
+  color:white;
+}
+
+div#gallery{
+  clear:both;
+}
+
+img#finalImg{
+  width:260px;
+}
+
+div#topContainer{
+  height:550px;
+}
+
+div#gallery h1{
+  font-size:125%;
+  color:white;
+  text-align: center;
+}
+
+header h1{
+  color:white;
+  text-align:center;
+}
+
+#sidebar{
+  float:left;
+  border:white solid 2px;
+  padding:5px;
+}
+
+div#controls{
+  margin-bottom:5px;
+}
+
+input#best{
+  color:lightgray;
+  width:65px;
+  display:block;
+  float:right;
+}
+
+#bestText{
+  color:white;
+  margin-left:10px;
+  margin-right:5px;
+  float:right;
+}
+
+div.row{
+  margin-right:0;
+  padding:0;
+}
+
+gameboard#img{
+  margin:0;
+  padding:0;
+  width:33.333%;
+  max-width:204px;
+}
+
+img.moveable:hover{
+  opacity:0.75;
+}
+
+#gameboard{
+  margin:0;
+  padding:0;
+  border: orange 2px solid;
+  border:white solid 2px;
+  line-height:0;
+  text-align:center;
+  float:right;
+  float:left;
+  margin-left:10px;
+}
+
+div#allContent{
+  width:900px;
+  margin:auto;
+}
+
+#sidebar figure{
+  margin:0;
+}
+
+#sidebar figcaption{
+  text-align:center;
+  color:white;
+}
+
+a{
+  text-decoration: none;
+  color:black;
+}
+
+table, form{
+  width:260px;
+}
+
+div#error{
+  font-size:150%;
+  color:white;
+}
+
+button#errorButton{
+  margin-left:20px;
+}
+
+input#resetDefault{
+  width:100%;
+}
+
+input[type="submit"]{
+float:right;
+}
+
+input[type="file"]{
+  width:180px;
+}
