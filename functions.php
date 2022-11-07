@@ -80,4 +80,30 @@
         return $err;
     }
 
+	/**
+	*Function checks if sides are both >= 612 pixels
+	*Check Width and Check Height
+	*@return error if image < 612
+	*/
+	function checkImageSideLength($imgMetaData){
+
+ 		$width = $exif["COMPUTED"]["Width"];
+		$height = $exif["COMPUTED"]["Height"];
+
+		if($height >= 612 || $width >= 612){
+			$err = true;
+			return $err;
+		}else{
+			$err = false;
+			return $err;
+		}
+
+	/*
+	if (height < 612) check if (width < 612)
+	if height is less but width is great return 0;
+	if height is greater, return 0
+	if height is less and width is less, return error
+	*/
+
+	}
 ?>
