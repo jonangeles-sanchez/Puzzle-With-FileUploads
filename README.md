@@ -24,7 +24,7 @@
           * This scaled image should be saved as "guideImage.jpg" in the "uploads" folder
         * After scaling, you should slice the guide image into nine equal-sized tiles and saved as "tile0.jpg" - "tile 8.jpg"
           * For simplicity, save all slices as jpegs
-        * ❌You will create a blank image by doing the following:
+        * Eli - You will create a blank image by doing the following:
           * create a new image resource in php of the proper size
           * Sample the center pixel in the guide image
             * use imagecolorat() for this
