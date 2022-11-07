@@ -6,6 +6,15 @@
   <title>Simple Javscript Puzzle</title>
   <link rel="stylesheet" href="puzzle.css" type="text/css" media="screen" />
    <script type="text/javascript" src="puzzle.js" defer></script>
+   <?php 
+   //Include external PHP file
+   require_once 'functions.php';
+
+   //Initialize variables
+   $location = "./uploads/";
+   $max = 1572864; //Equivalent to 1.5 M
+   
+   ?>
 </head>
 <body>
   <div id="allContent">
@@ -35,6 +44,19 @@
                 <input type="hidden" name="MAX_FILE_SIZE" value="1048576">
                 <input type="file" name="imageUpload">
                 <input type="submit" name="upload" value="Upload">
+                <?php
+                  if(isset($_POST['upload'])){
+                    //Array is passed containing information of recent file upload
+                    checkFileValidity($_FILES['imageUpload']);
+                    /*
+                      Information passed: 
+                        -fileName (name)
+                        -fileFullPath (full_path)
+                        -fileType (type)
+                        -tmp_name
+                    */
+                  }
+                ?>
               </td>
             </tr>
           <tr>
