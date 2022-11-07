@@ -1,10 +1,11 @@
 # Puzzle-With-FileUploads
 ## Assignment details
 
-* When the page is loaded initially, the default image should be used for the puzzle
-  * This image and all its tiles are stored in the "images" directory
-* Three new buttons are now available in the "control panel" area (provided)
-  * "Choose File" which allows you to choose an image for uploading
+
+* ✅ When the page is loaded initially, the default image should be used for the puzzle
+  * ✅ This image and all its tiles are stored in the "images" directory
+* ✅ Three new buttons are now available in the "control panel" area (provided)
+  * ✅"Choose File" which allows you to choose an image for uploading
   * "Upload" which submits the uploaded file
       * When this button is pressed your game should behave in the following way
         * If any errors occur, you should display a JavaScript alert and reset the game to the default image
