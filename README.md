@@ -8,7 +8,7 @@
   * ✅"Choose File" which allows you to choose an image for uploading
   * ✅"Upload" which submits the uploaded file
       * When this button is pressed your game should behave in the following way
-        * ❌If any errors occur, you should display a JavaScript alert and reset the game to the default image
+        * Jarib Pott - If any errors occur, you should display a JavaScript alert and reset the game to the default image
         * Possible errors are:
           * File is not an image
             * allow jpeg, png, and gif images
