@@ -17,7 +17,7 @@
           * No file was uploaded
         * Leo - All files in the "uploads" directory except those starting with a dot should be deleted
           * use scanDir() and unlink() for this
-        * ❌If all is good with the upload, it should be scaled down to be 612 pixels on the longest side
+        * Jon - If all is good with the upload, it should be scaled down to be 612 pixels on the longest side
           * The final scaled image should be modified slightly so that both the height and width are multiples of 3
             * 612 is already a multiple of three
             * The other dimension will need to be reduced by at most two pixels
