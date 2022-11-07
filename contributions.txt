@@ -8,5 +8,5 @@ JP:
 Eli:
 
 Jonathan:
--Reformatted recycled code and new code by creating new functions and adding comments
+-Reformatted recycled code and new code by creating new functions and adding comments.
 -Added the ability to upload files with JP.
