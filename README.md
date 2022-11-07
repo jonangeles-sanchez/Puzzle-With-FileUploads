@@ -1,6 +1,6 @@
 # Puzzle-With-FileUploads
 ## Assignment details
-
+__Due date: 11/14/22__
 
 * ✅ When the page is loaded initially, the default image should be used for the puzzle
   * ✅ This image and all its tiles are stored in the "images" directory
