@@ -44,10 +44,32 @@
                 echo "Error uploading, duplicate img \"{$img['name']}\"<br>";
             } else {
                 //Upload image to file directory
-                move_uploaded_file($img['tmp_name'], $location . $img['name']);
-                echo "File '{$img['name']}' uploaded successfully<br>";
+                uploadImg($img);
             }
         }
+    }
+
+    /**
+     * Resizes image
+     */
+    function resizeImg($img){
+
+    }
+
+    /**
+     * Moves uploaded image to uploads folder and renamed as "guideImage.jpg"
+     */
+    function uploadImg($img){
+        global $location;
+        move_uploaded_file($img['tmp_name'], $location . "guideImage.jpg");
+        echo "File '{$img['name']}' uploaded successfully<br>";
+    }
+
+    /**
+     * Slices image into 9 even images and saved to uploads folder
+     */
+    function sliceAndSave($img){
+        
     }
 
     /**
@@ -80,4 +102,5 @@
         return $err;
     }
 
+    
 ?>
