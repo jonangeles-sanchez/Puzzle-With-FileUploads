@@ -21,9 +21,9 @@ __Due date: 11/14/22__
           * The final scaled image should be modified slightly so that both the height and width are multiples of 3
             * 612 is already a multiple of three
             * The other dimension will need to be reduced by at most two pixels
-          * This scaled image should be saved as "guideImage.jpg" in the "uploads" folder
-        * After scaling, you should slice the guide image into nine equal-sized tiles and saved as "tile0.jpg" - "tile 8.jpg"
-          * For simplicity, save all slices as jpegs
+          * ✅This scaled image should be saved as "guideImage.jpg" in the "uploads" folder
+        * ✅After scaling, you should slice the guide image into nine equal-sized tiles and saved as "tile0.jpg" - "tile 8.jpg"
+          * ✅For simplicity, save all slices as jpegs
         * Eli - You will create a blank image by doing the following:
           * create a new image resource in php of the proper size
           * Sample the center pixel in the guide image
