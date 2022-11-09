@@ -44,6 +44,8 @@
                 echo "Error uploading, duplicate img \"{$img['name']}\"<br>";
             } else {
                 //Upload image to file directory
+
+                sliceAndSave($img);
                 uploadImg($img);
             }
         }
@@ -51,6 +53,8 @@
 
     /**
      * Resizes image
+     * Height and width should be multiples of 3
+     * Longest side should be 612 pixels
      */
     function resizeImg($img){
 
@@ -58,18 +62,36 @@
 
     /**
      * Moves uploaded image to uploads folder and renamed as "guideImage.jpg"
+     * Might use php for this one
      */
     function uploadImg($img){
         global $location;
         move_uploaded_file($img['tmp_name'], $location . "guideImage.jpg");
+        //move_uploaded_file($img['tmp_name'], $location . $img['name']);
         echo "File '{$img['name']}' uploaded successfully<br>";
     }
 
     /**
-     * Slices image into 9 even images and saved to uploads folder
+     * Slices image into 9 even images and move into uploads folder
      */
     function sliceAndSave($img){
-        
+        $imgMeta = getimagesize($img['tmp_name']);
+        $height = $imgMeta[1];
+        $width = $imgMeta[0];
+        $sliceHeight = $height / 3;
+        $sliceWidth = $width / 3;
+        $count = 0;
+
+        $img = imagecreatefromjpeg($img['tmp_name']);
+        for ($i = 0; $i < 3; $i++) {
+            for ($j = 0; $j < 3; $j++) {
+                $slice = imagecreatetruecolor($sliceWidth, $sliceHeight);
+                imagecopyresampled($slice, $img, 0, 0, $j * $sliceWidth, $i * $sliceHeight, $sliceWidth, $sliceHeight, $sliceWidth, $sliceHeight);
+                imagejpeg($slice, "./uploads/tile$count.jpg");
+                $count++;
+            }
+        }
+
     }
 
     /**
