@@ -17,10 +17,10 @@ __Due date: 11/14/22__
           * No file was uploaded
         * Leo - All files in the "uploads" directory except those starting with a dot should be deleted
           * use scanDir() and unlink() for this
-        * Jon - If all is good with the upload, it should be scaled down to be 612 pixels on the longest side
-          * The final scaled image should be modified slightly so that both the height and width are multiples of 3
-            * 612 is already a multiple of three
-            * The other dimension will need to be reduced by at most two pixels
+        * ✅ Jon -  If all is good with the upload, it should be scaled down to be 612 pixels on the longest side
+          * ✅ The final scaled image should be modified slightly so that both the height and width are multiples of 3
+            * ✅ 612 is already a multiple of three
+            * ✅ The other dimension will need to be reduced by at most two pixels
           * ✅This scaled image should be saved as "guideImage.jpg" in the "uploads" folder
         * ✅After scaling, you should slice the guide image into nine equal-sized tiles and saved as "tile0.jpg" - "tile 8.jpg"
           * ✅For simplicity, save all slices as jpegs
