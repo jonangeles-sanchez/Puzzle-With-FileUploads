@@ -23,6 +23,8 @@
             -extension
             -filename
         */
+        $imgSizeData = getimagesize($img['tmp_name']);
+        
         
         //Check image size is smaller than max image size
         $sizeError=checkImgSizeError($img['size'], $max);
@@ -44,19 +46,100 @@
                 echo "Error uploading, duplicate img \"{$img['name']}\"<br>";
             } else {
                 //Upload image to file directory
-
-                sliceAndSave($img);
                 uploadImg($img);
+                //Resize image
+                resizeImg($img, $imgSizeData);
+                //Slice the image into 9 pieces & upload to folder
+                sliceAndSave($img, $imgSizeData);
             }
         }
     }
 
     /**
-     * Resizes image
+     * Resizes image into a new image in uploads folder
      * Height and width should be multiples of 3
      * Longest side should be 612 pixels
      */
-    function resizeImg($img){
+    function resizeImg($img, $imgSizeData){
+        global $location;
+        $imgMeta = $imgSizeData;
+        //print_r($img);
+        //print_r($imgMeta);
+        $name = $img['name'];
+        echo $name;
+        $origName = $name;
+        $height = $imgMeta[1];
+        $width = $imgMeta[0];
+        $newHeight = $height;
+        $newWidth = $width;
+        $pixelResizeCount = 0;
+
+        //echo "Original height: $height<br>";
+        //echo "Original width: $width<br>";
+
+        if($height > $width){
+            $newHeight = 612;
+            while($newWidth % 3 != 0){
+                $newWidth -= 1;
+                $pixelResizeCount++;
+                if($pixelResizeCount == 2){
+                    break;
+                }
+            }
+        } else if($width > $height){
+            $newWidth = 612;
+            while($newHeight % 3 != 0){
+                $newHeight -= 1;
+                $pixelResizeCount++;
+                if($pixelResizeCount == 2){
+                    break;
+                }
+            }
+        }
+        //echo "New height: $newHeight<br>";
+        //echo "New width: $newWidth<br>";
+
+        $name=pathinfo($name, PATHINFO_FILENAME);
+
+        $newName = $name . "_resized";
+
+        //echo "Type: ".$imgMeta['mime']."\n\n";
+
+        echo "Name: " . $origName;
+
+        if($imgMeta['mime']=="image/jpeg"){
+            $origImage=imagecreatefromjpeg($location."guideImage.jpg");
+            echo "created jpeg object";
+        } else if($imgMeta['mime']=="image/png"){
+            $origImage=imagecreatefrompng($location.$origName);
+            echo "created png object";
+        } else if($imgMeta['mime']=="image/gif"){
+            $origImage=imagecreatefromgif($location.$origName);
+            echo "created gif object";
+        } else {
+            echo "ERROR"; //used for debugging
+        }
+        
+        
+        echo "Type: ". gettype($origImage); //used for debugging
+
+        $newImage=imagecreatetruecolor($newWidth, $newHeight);
+
+
+	    imagecopyresampled($newImage, $origImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        //imagecopy($newImage, $origImage, 0, 0, 0, 0, $newWidth, $newHeight);
+        
+	    if($imgMeta['mime']=="image/jpeg"){
+	        $newName=$location.$newName.".jpg";	
+	        $done=imagejpeg($newImage, $newName, 100);
+	    } else if($imgMeta['mime']=="image/png"){
+	        $newName=$location.$newName.".png";	
+	        $done=imagepng($newImage, $newName, 0);
+        } else if($imgMeta['mime']=="image/gif"){
+	        $newName=$location.$newName.".gif";	
+	        $done=imagegif($newImage, $newName);
+	    }
+        
 
     }
 
@@ -73,9 +156,34 @@
 
     /**
      * Slices image into 9 even images and move into uploads folder
+     * Check file type - i think this only works for jpg
      */
+    function sliceAndSave($img, $imgSizeData){
+        global $location;
+        $height = $imgSizeData[1];
+        $width = $imgSizeData[0];
+        $sliceHeight = $height / 3;
+        $sliceWidth = $width / 3;
+        $count = 0;
+        
+        //move_uploaded_file($img['tmp_name'], $location . "guideImage.jpg");
+        //originalName = movefile tmp_name to uploadsDir; 
+        $img = imagecreatefromjpeg($location . "guideImage.jpg");
+        for ($i = 0; $i < 3; $i++) {
+            for ($j = 0; $j < 3; $j++) {
+                $slice = imagecreatetruecolor($sliceWidth, $sliceHeight);
+                imagecopyresampled($slice, $img, 0, 0, $j * $sliceWidth, $i * $sliceHeight, $sliceWidth, $sliceHeight, $sliceWidth, $sliceHeight);
+                imagejpeg($slice, "./uploads/tile$count.jpg");
+                $count++;
+            }
+        }
+
+    }
+    
+    /*
     function sliceAndSave($img){
         $imgMeta = getimagesize($img['tmp_name']);
+        print_r($imgMeta);
         $height = $imgMeta[1];
         $width = $imgMeta[0];
         $sliceHeight = $height / 3;
@@ -93,6 +201,7 @@
         }
 
     }
+    */
 
     /**
      * Function checks for the criteria of image size.
@@ -123,6 +232,5 @@
         }
         return $err;
     }
-
     
 ?>
