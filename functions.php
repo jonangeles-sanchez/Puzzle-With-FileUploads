@@ -29,9 +29,14 @@
         //Check image size is smaller than max image size
         $sizeError=checkImgSizeError($img['size'], $max);
 
-        if($sizeError){
-          echo "Error uploading, img \"{$img['name']}\" has a size that
-          exceeds the max allowed<br>";
+        $lengthError= checkSideLength($img);
+
+        if($sizeError || $lengthError){
+            if($sizeError)
+                echo '<script type="text/JavaScript">alert("Error uploading, file too large, please choose file below 1.5MB");</script>';
+            else if($lengthError)
+                echo '<script type="text/JavaScript">alert("Error uploading, file side length too small please choose image with width or height greater than 612 pixels");</script>';
+            return;
         } else {
             //Check if file type is valid
             $fileTypeError=checkFileTypeError($imgMetaData);
@@ -65,7 +70,7 @@
         $imgMeta = $imgSizeData;
         //print_r($img);
         //print_r($imgMeta);
-        $name = $img['name'];
+        $name = $img['name']; //"guideImage.jpg"
         echo $name;
         $origName = $name;
         $height = $imgMeta[1];
@@ -231,6 +236,18 @@
                 $err = false;
         }
         return $err;
+    }
+
+    function checkSideLength($img){
+        $imgMeta  = getimagesize($img['tmp_name']);
+        $imgHeight = $imgMeta[1];
+        $imgWidth  = $imgMeta[0];
+        if($imgHeight > 612 || $imgWidth > 612){
+            return false;
+        }else{
+            return true;
+        }
+  
     }
     
 ?>
