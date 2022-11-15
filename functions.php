@@ -56,6 +56,7 @@
                 resizeImg($img, $imgSizeData);
                 //Slice the image into 9 pieces & upload to folder
                 sliceAndSave($img, $imgSizeData);
+                createBlank($img, $imgSizeData);
             }
         }
     }
@@ -248,6 +249,65 @@
             return true;
         }
   
+    }
+    
+
+    /**
+     * Creates a blank image that is filled with color sampled from the center of the uploaded image
+     */
+    function createBlank($img, $imgSizeData){
+        global $location;
+        $imgMeta = $imgSizeData;
+        $name = "guideImage.jpg";
+        $origName = $name;
+        $height = $imgMeta[1];
+        $width = $imgMeta[0];
+        $newHeight = $height/2; //getting colr
+        $newWidth = $width/2; //get clr
+
+        //imagecolorat()
+
+        
+        if($imgMeta['mime']=="image/jpeg"){
+            $origImage=imagecreatefromjpeg($location."guideImage.jpg");
+            echo "created jpeg object";
+        }else if($imgMeta['mime']=="image/png"){
+            $origImage=imagecreatefrompng($location.$origName);
+            echo "created png object";
+        }else if($imgMeta['mime']=="image/gif"){
+            $origImage=imagecreatefromgif($location.$origName);
+            echo "created gif object";
+        } else {
+            echo "ERROR";
+        }
+        
+        list($tileWidth, $tileHeight) = getimagesize($location."tile0.jpg");
+        $newImage=imagecreatetruecolor($tileWidth, $tileHeight);
+        
+        $rgb = imagecolorat($origImage, $newWidth, $newHeight);
+        $colors = imagecolorsforindex($origImage, $rgb);
+        $red = $colors['red'];
+        $green = $colors['green'];
+        $blue = $colors['blue'];
+        $alpha = $colors['alpha'];
+        $color = imagecolorallocatealpha($newImage, $red, $green, $blue, $alpha);
+        imagefill($newImage, 0, 0, $color);
+
+        $newName = "blank";
+
+        if($imgMeta['mime']=="image/jpeg"){
+            $newName=$location.$newName.".jpg";
+            $done=imagejpeg($newImage, $newName, 100);
+        } else if($imgMeta['mime']=="image/png"){
+            $newName=$location.$newName.".png";
+            $done=imagepng($newImage, $newName, 0);
+        } else if($imgMeta['mime']=="image/gif"){
+            $newName=$location.$newName.".gif";
+            $done=imagegif($newImage, $newName);
+        }
+
+
+
     }
     
 ?>
