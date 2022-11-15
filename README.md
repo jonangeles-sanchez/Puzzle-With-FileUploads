@@ -12,7 +12,7 @@ __Due date: 11/14/22__
         * Possible errors are:
           * File is not an image
             * allow jpeg, png, and gif images
-          * File is not at least 612 pixels on one of the sides
+          * ✅File is not at least 612 pixels on one of the sides
           * File is too large (max size should be 1.5MB)
           * No file was uploaded
         * Leo - All files in the "uploads" directory except those starting with a dot should be deleted
