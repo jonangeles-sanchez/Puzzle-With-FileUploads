@@ -24,14 +24,14 @@ __Due date: 11/14/22__
           * ✅This scaled image should be saved as "guideImage.jpg" in the "uploads" folder
         * ✅After scaling, you should slice the guide image into nine equal-sized tiles and saved as "tile0.jpg" - "tile 8.jpg"
           * ✅For simplicity, save all slices as jpegs
-        * Eli - You will create a blank image by doing the following:
+        * ✅Eli - You will create a blank image by doing the following:
           * ✅create a new image resource in php of the proper size
           * ✅Sample the center pixel in the guide image
             * ✅use imagecolorat() for this
-          * extract the r, g, b values for that color
-            * read the php manual to find out how to extract the rgb values
+          * ✅extract the r, g, b values for that color
+            * ✅read the php manual to find out how to extract the rgb values
           * Invert the color extracted and use the inverted color for the blank
-          * fill the new image resource with the new color
+          * ✅fill the new image resource with the new color
             * ✅use imagefill() for this
           * ✅Save the image as "blank.jpg" in the "uploads" folder
 * ✅"Reset to default puzzle image"
