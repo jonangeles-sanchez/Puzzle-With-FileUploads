@@ -1,11 +1,14 @@
 Please list your contributions here so we can write about them and turn them in.
-You're welcome to write whatever, idc.
 
 Leo:
+-created function to delete old image files
 
 JP:
+-Added the ability to upload files
+-Added error checking 
 
 Eli:
+-Added new image to puzzle by creating a new image and filling it with a random color in center of original image
 
 Jonathan:
 -Reformatted recycled code and new code by creating new functions and adding comments.

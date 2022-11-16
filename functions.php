@@ -10,7 +10,7 @@
      * 
      */
     function checkFileValidity($img){
-        global $max;
+        global $maxSize;
         global $location;
 
         $imgMetaData = pathinfo($img['name']);
@@ -27,12 +27,12 @@
         
         
         //Check image size is smaller than max image size
-        $sizeError=checkImgSizeError($img['size'], $max);
+        $sizeError=checkImgSizeError($img['size'], $maxSize);
 
         $lengthError= checkSideLength($img);
 
         if($sizeError || $lengthError){
-            if($sizeError)
+            if($sizeError == true)
                 echo '<script type="text/JavaScript">alert("Error uploading, file too large, please choose file below 1.5MB");</script>';
             else if($lengthError)
                 echo '<script type="text/JavaScript">alert("Error uploading, file side length too small please choose image with width or height greater than 612 pixels");</script>';
@@ -42,7 +42,7 @@
             $fileTypeError=checkFileTypeError($imgMetaData);
         }
         if (!$fileTypeError) {
-            echo "Error uploading, img $imgMetaData type not allowed<br>";
+            echo '<script type="text/JavaScript">alert("Error uploading, img type not allowed");</script>';
         } else {
             $img['name'] = str_replace(' ', '-', $img['name']);
             //Check if directory exists
@@ -308,6 +308,15 @@
 
 
 
+    }
+
+    function deleteImages($location){
+        $imgScan = scandir($location);
+        foreach($imgScan as $img){
+            if($img[0] != "." || $img == "guideImage.jpg"){
+                unlink($location.$img);
+            }
+        }
     }
     
 ?>
