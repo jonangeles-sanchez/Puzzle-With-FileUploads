@@ -12,8 +12,7 @@
 
    //Initialize variables
    $location = "./uploads/";
-   $max = 1572864; //Equivalent to 1.5 M
-   
+   $maxSize = 1572864; //Equivalent to 1.5 M
    ?>
 </head>
 <body>
@@ -43,7 +42,7 @@
               <td>
                 <input type="hidden" name="MAX_FILE_SIZE" value="1048576">
                 <input type="file" name="imageUpload">
-                <input type="submit" name="upload" value="Upload">
+                <input type="submit" name="upload" value="Upload" onclick="changeDir()">
                 <?php
                   if(isset($_POST['upload'])){
                     //Array is passed containing information of recent file upload
